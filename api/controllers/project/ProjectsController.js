@@ -139,6 +139,56 @@ class ProjectsController {
         return res.status(statusCode).json(response);
     }
   }
+
+  static async resolved_bugs(req, res) {
+    try {
+      const projectId = req.params.id;
+      const resolved_bugs = await ProjectManager.get_resolved_bugs(projectId)
+      console.log("resolve",resolved_bugs)
+      if (resolved_bugs.count > 0 ) {
+        res.json({
+          success: true,
+          resolved_bugs: resolved_bugs
+        });
+      } else {
+        res.json({ 
+          success: false,
+          error: `No bugs Project ID::${projectId} found` });
+      }
+    } catch (error) {
+        const statusCode = Validators.validateCode(error.code, ErrorCodes.INTERNAL_SERVER_ERROR) || ErrorCodes.INTERNAL_SERVER_ERROR;
+        const response = {
+          success: false,
+          message: error.message
+        };
+        return res.status(statusCode).json(response);
+    }
+  }
+
+  static async all_bugs(req, res) {
+    try {
+      const projectId = req.params.id;
+      const all_bugs = await ProjectManager.get_all_bugs(projectId)
+      console.log("resolve",all_bugs)
+      if (all_bugs.count > 0 ) {
+        res.json({
+          success: true,
+          all_bugs: all_bugs
+        });
+      } else {
+        res.json({ 
+          success: false,
+          error: `No bugs Project ID::${projectId} found` });
+      }
+    } catch (error) {
+        const statusCode = Validators.validateCode(error.code, ErrorCodes.INTERNAL_SERVER_ERROR) || ErrorCodes.INTERNAL_SERVER_ERROR;
+        const response = {
+          success: false,
+          message: error.message
+        };
+        return res.status(statusCode).json(response);
+    }
+  }
   
   static  async project_manager(req, res) {
     try {

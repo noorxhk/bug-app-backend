@@ -10,6 +10,10 @@ router.post('/', projectsController.create_project);
 
 router.get('/:id/bugs', Authentication.authenticate,  projectsController.project_bugs);
 
+router.get('/:id/resolved-bugs',  projectsController.resolved_bugs);
+
+router.get('/:id/all-bugs',  projectsController.all_bugs);
+
 router.put('/:id', projectsController.update_project);
 
 router.delete('/:id', projectsController.delete_project);

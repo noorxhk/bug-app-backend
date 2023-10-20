@@ -50,6 +50,21 @@ class ProjectHandler {
       .where('user_projects.project_id', projectId);
   }
 
+  static getResolvedBugs(projectId) {
+    return db('bugs')
+    .count('bug_id as count')
+    .where('project_id', projectId)
+    .whereIn('bug_status', ['resolved', 'completed'])
+    .first();
+  }
+
+  static getAllBugsCount(projectId) {
+    return db('bugs')
+      .count('bug_id as count')
+      .where('project_id', projectId)
+      .first();
+  }
+
   static getProjectManager(projectId) {
     return db('users')
       .select('users.*')

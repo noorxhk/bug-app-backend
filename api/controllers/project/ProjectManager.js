@@ -31,6 +31,16 @@ class ProjectManager {
     return project_users;
   }
 
+  static async get_resolved_bugs(projectId) {
+    let project_users = await ProjectHandler.getResolvedBugs(projectId)
+    return project_users;
+  }
+  
+  static async get_all_bugs(projectId) {
+    let project_users = await ProjectHandler.getAllBugsCount(projectId)
+    return project_users;
+  }
+
   static async get_project_manager(projectId) {
     let project_manager = await ProjectHandler.getProjectManager(projectId)
     return project_manager;

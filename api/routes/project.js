@@ -12,6 +12,8 @@ router.get('/:id/bugs', Authentication.authenticate,  projectsController.project
 
 router.get('/:id/resolved-bugs',  projectsController.resolved_bugs);
 
+router.post('/:id/assign-project',  projectsController.assign_project);
+
 router.get('/:id/all-bugs',  projectsController.all_bugs);
 
 router.put('/:id', projectsController.update_project);

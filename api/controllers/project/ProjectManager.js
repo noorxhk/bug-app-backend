@@ -35,6 +35,10 @@ class ProjectManager {
     let project_users = await ProjectHandler.getResolvedBugs(projectId)
     return project_users;
   }
+  static async assign_project_to_user(projectId, userId) {
+    let project_user = await ProjectHandler.assignProjectToUser(projectId, userId)
+    return project_user;
+  }
   
   static async get_all_bugs(projectId) {
     let project_users = await ProjectHandler.getAllBugsCount(projectId)

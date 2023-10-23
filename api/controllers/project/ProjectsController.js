@@ -164,6 +164,23 @@ class ProjectsController {
         return res.status(statusCode).json(response);
     }
   }
+  static async assign_project(req, res) {
+    try {
+      const projectId = req.params.id;
+      const userId = req.body.user_id
+      const project_user = await ProjectManager.assign_project_to_user(projectId, userId)
+        res.json({
+          success: true,
+        });
+    } catch (error) {
+        const statusCode = Validators.validateCode(error.code, ErrorCodes.INTERNAL_SERVER_ERROR) || ErrorCodes.INTERNAL_SERVER_ERROR;
+        const response = {
+          success: false,
+          message: error.message
+        };
+        return res.status(statusCode).json(response);
+    }
+  }
 
   static async all_bugs(req, res) {
     try {

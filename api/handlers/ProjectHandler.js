@@ -64,6 +64,18 @@ class ProjectHandler {
       .where('project_id', projectId)
       .first();
   }
+  
+  static async assignProjectToUser(projectId, userId) {
+    const existingRecord = await db('user_projects')
+      .where({ user_id: userId, project_id: projectId })
+      .first();
+  
+    if (existingRecord) {
+      return existingRecord;
+    } else {
+      return db('user_projects').insert({ user_id: userId, project_id: projectId }).returning('*');
+    }
+  }
 
   static getProjectManager(projectId) {
     return db('users')
